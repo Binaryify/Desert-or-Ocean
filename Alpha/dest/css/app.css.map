@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.scss"],"names":[],"mappings":"AAAA;EACE,WAAU;EACV,oCAAqB;UAArB,4BAAqB,EACtB","file":"app.css","sourcesContent":["*{\n  color:red;\n  transform: translateX(30px);\n}\n"],"sourceRoot":"/source/"}
