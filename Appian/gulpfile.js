@@ -39,7 +39,7 @@ var formatDateTime = function() {
   });
 
   gulp.task('scssToCss', function () {
-      return gulp.src('./'+now+'/src/*.scss')
+      return gulp.src('./'+now+'/src/sass/*.scss')
           .pipe(sourcemaps.init())
           .pipe(sass().on('error', sass.logError))
           .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
@@ -47,7 +47,7 @@ var formatDateTime = function() {
           .pipe(gulp.dest('./'+now+'/dest/css/'));
   });
   gulp.task('watchCss', function () {
-    gulp.watch('./'+now+'/src/*.scss', ['scssToCss']);
+    gulp.watch('./'+now+'/src/sass/*.scss', ['scssToCss']);
   });
   //默认任务
   gulp.task('default', function(){

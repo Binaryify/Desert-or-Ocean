@@ -1,7 +1,7 @@
 
 
 |---Appian
-    |---dist
+    |---dest
     |   |---css
     |   |   |---Apr-1-2016
     |   |   |   |---Apr-1-2016.css(可能有多个css)
