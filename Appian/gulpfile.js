@@ -3,7 +3,6 @@ var gulp = require('gulp');
 var postcss      = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var sourcemaps   = require('gulp-sourcemaps');
-var gulpCopy = require('gulp-copy');
 var fs=require('fs');
 var formatDateTime = function() {
   var date=new Date();
