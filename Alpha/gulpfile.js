@@ -28,7 +28,8 @@ var formatDateTime = function() {
           server: "./"+now
       });
       gulp.watch("./"+now+"/src/sass/*.scss", ['scssToCss']);
-      gulp.watch("./"+now+"/*.html").on('change', reload);
+      gulp.watch("./"+now+"/src/*/*.js").on('change', reload);
+      gulp.watch(["./"+now+"/*.html","./"+now+"/*/*.html","./"+now+"/*/*/*.html"]).on('change', reload);
   });
 
   console.log(now)
