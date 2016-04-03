@@ -1,11 +1,14 @@
-var sass = require('gulp-sass');
+var sass = require("gulp-sass");
 var gulp = require('gulp');
 var postcss      = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
-var sourcemaps   = require('gulp-sourcemaps');
 var fs=require('fs')
 var browserSync = require('browser-sync').create();
 var reload      = browserSync.reload;
+var filter      = require('gulp-filter');
+var sourcemaps = require('gulp-sourcemaps');
+
+
 var formatDateTime = function() {
   var date=new Date()
   var y = date.getFullYear();
@@ -25,7 +28,8 @@ var formatDateTime = function() {
           server: "./"+now
       });
       gulp.watch("./"+now+"/src/sass/*.scss", ['scssToCss']);
-      gulp.watch("./"+now+"/*.html").on('change', reload);
+      gulp.watch("./"+now+"/src/*/*.js").on('change', reload);
+      gulp.watch(["./"+now+"/*.html","./"+now+"/*/*.html","./"+now+"/*/*/*.html"]).on('change', reload);
   });
 
   console.log(now)
@@ -54,8 +58,8 @@ var formatDateTime = function() {
           .pipe(sourcemaps.init())
           .pipe(sass().on('error', sass.logError))
           .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
-          .pipe(sourcemaps.write('.'))
+          .pipe(sourcemaps.write())
           .pipe(gulp.dest('./'+now+'/dest/css/'))
-          .pipe(reload({stream: true}));
+          .pipe(browserSync.reload({stream:true}));
   });
   gulp.task('default', ['serve']); //默认任务

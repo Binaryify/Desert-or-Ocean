@@ -10,11 +10,21 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+<<<<<<< HEAD
+    "gulp-postcss": "^6.1.0",
+=======
+>>>>>>> 8ce26fef630427e7c0cd486adbd3c180ca164bc1
     "autoprefixer": "^6.3.5",
     "browser-sync": "^2.11.2",
     "gulp": "^3.9.1",
+<<<<<<< HEAD
+    "browser-sync": "^2.11.2",
+    "gulp-filter": "^4.0.0",
+    "gulp-sass": "^2.2.0"
+=======
     "gulp-postcss": "^6.1.0",
     "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0"
+>>>>>>> 8ce26fef630427e7c0cd486adbd3c180ca164bc1
   }
 }
