@@ -3,8 +3,9 @@ var gulp = require('gulp');
 var postcss      = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var sourcemaps   = require('gulp-sourcemaps');
-var gulpCopy = require('gulp-copy');
 var fs=require('fs')
+var browserSync = require('browser-sync').create();
+var reload      = browserSync.reload;
 var formatDateTime = function() {
   var date=new Date()
   var y = date.getFullYear();
@@ -18,6 +19,15 @@ var formatDateTime = function() {
   return y + '-' + m + '-' + d ;
 };
   var now=formatDateTime()
+  // 静态服务器 + 监听 scss/html 文件
+  gulp.task('serve', ['scssToCss'], function() {
+      browserSync.init({
+          server: "./"+now
+      });
+      gulp.watch("./"+now+"/src/sass/*.scss", ['scssToCss']);
+      gulp.watch("./"+now+"/*.html").on('change', reload);
+  });
+
   console.log(now)
   fs.stat('./'+now, function(err, stat) {
       if(err == null) {
@@ -40,18 +50,12 @@ var formatDateTime = function() {
   });
 
   gulp.task('scssToCss', function () {
-      return gulp.src('./'+now+'/src/*.scss')
+      return gulp.src('./'+now+'/src/sass/*.scss')
           .pipe(sourcemaps.init())
           .pipe(sass().on('error', sass.logError))
           .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
           .pipe(sourcemaps.write('.'))
-          .pipe(gulp.dest('./'+now+'/dest/css/'));
+          .pipe(gulp.dest('./'+now+'/dest/css/'))
+          .pipe(reload({stream: true}));
   });
-  gulp.task('watchCss', function () {
-    gulp.watch('./'+now+'/src/*.scss', ['scssToCss']);
-  });
-  //默认任务
-  gulp.task('default', function(){
-    gulp.run('scssToCss');
-    gulp.run('watchCss');
-  });
+  gulp.task('default', ['serve']); //默认任务
