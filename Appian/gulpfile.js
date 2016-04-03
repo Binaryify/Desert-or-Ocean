@@ -3,9 +3,11 @@ var gulp = require('gulp');
 var postcss      = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var sourcemaps   = require('gulp-sourcemaps');
-var fs=require('fs');
+var fs=require('fs')
+var browserSync = require('browser-sync').create();
+var reload      = browserSync.reload;
 var formatDateTime = function() {
-  var date=new Date();
+  var date=new Date()
   var y = date.getFullYear();
   var m = date.getMonth() + 1;
   m = m < 10 ? ('0' + m) : m;
@@ -16,8 +18,17 @@ var formatDateTime = function() {
   minute = minute < 10 ? ('0' + minute) : minute;
   return y + '-' + m + '-' + d ;
 };
-  var now=formatDateTime();
-  console.log(now);
+  var now=formatDateTime()
+  // 静态服务器 + 监听 scss/html 文件
+  gulp.task('serve', ['scssToCss'], function() {
+      browserSync.init({
+          server: "./"+now
+      });
+      gulp.watch("./"+now+"/src/sass/*.scss", ['scssToCss']);
+      gulp.watch("./"+now+"/*.html").on('change', reload);
+  });
+
+  console.log(now)
   fs.stat('./'+now, function(err, stat) {
       if(err == null) {
           if(stat.isDirectory()) {
@@ -44,13 +55,7 @@ var formatDateTime = function() {
           .pipe(sass().on('error', sass.logError))
           .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
           .pipe(sourcemaps.write('.'))
-          .pipe(gulp.dest('./'+now+'/dest/css/'));
+          .pipe(gulp.dest('./'+now+'/dest/css/'))
+          .pipe(reload({stream: true}));
   });
-  gulp.task('watchCss', function () {
-    gulp.watch('./'+now+'/src/sass/*.scss', ['scssToCss']);
-  });
-  //默认任务
-  gulp.task('default', function(){
-    gulp.run('scssToCss');
-    gulp.run('watchCss');
-  });
+  gulp.task('default', ['serve']); //默认任务
