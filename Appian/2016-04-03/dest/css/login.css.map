@@ -1,1 +1,1 @@
-{"version":3,"sources":["login.scss"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,kBAAkB,EACnB","file":"login.css","sourcesContent":["h1 {\r\n  color: red;\r\n  font-weight: bold;\r\n}"],"sourceRoot":"/source/"}
+{"version":3,"sources":["login.scss"],"names":[],"mappings":"AAAA;EACE,aAAa;EACb,kBAAkB;EAClB,mBAAmB,EACpB","file":"login.css","sourcesContent":["h1 {\r\n  color: green;\r\n  font-weight: bold;\r\n  font-style: italic;\r\n}"],"sourceRoot":"/source/"}
