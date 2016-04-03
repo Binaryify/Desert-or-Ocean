@@ -23,19 +23,44 @@ var password = (function(){
 var pin = (function(){
     var pinArr = [];
     return {
-        'click' : function(value){
-            pinArr.push(value);
-            console.log(pinArr);
+        'init' : function(){
+            for(var j = 0; j < 4; j++){
+                document.getElementById('pin').getElementsByTagName('span')[j].removeAttribute('class');
+            }
         },
-        'delete' : function(){
+        'click' : function(value){
+            if(this.check()){
+                pinArr.push(value);
+                console.log(pinArr);
+                for(var i = 0; i < pinArr.length; i++){
+                    document.getElementById('pin').getElementsByTagName('span')[i].setAttribute('class','on');
+                }
+                if(pinArr.length == 4){
 
+                }
+            }else {
+                pinArr.length = 0;
+                this.init();
+            }
         },
         'check': function(){
-
+            if(pinArr.length >= 4){
+            }else {
+                return true;
+            }
+        },
+        'delete' : function(){
+            pinArr.pop();
+            this.init();
+            for(var i = 0; i < pinArr.length; i++){
+                document.getElementById('pin').getElementsByTagName('span')[i].setAttribute('class','on');
+            }
         },
         'moveRight' : function(){
             document.getElementById('password').removeAttribute('class');
             document.getElementById('pinword').removeAttribute('class');
+            pinArr.length = 0;
+            this.init();
         }
     }
 })();
@@ -51,16 +76,18 @@ document.getElementsByClassName('iconfont')[1].onclick = function(){
     password.moveLeft();
 };
 
-document.getElementsByClassName('iconfont')[3].onclick = function(){
-    pin.moveRight();
-};
-
 var $td = document.getElementsByTagName('td');
 console.log($td);
 
 for(var i = 0; i < $td.length; i ++){
     $td[i].onclick = function(){
         var value = this.getAttribute('data-val');
-        pin.click(value);
+        if(value >= 0){
+            pin.click(value-0);
+        }else if (value == -1){
+            pin.moveRight();
+        }else {
+            pin.delete();
+        }
     }
 }
