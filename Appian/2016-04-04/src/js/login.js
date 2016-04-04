@@ -29,22 +29,40 @@ var pin = (function(){
             }
         },
         'click' : function(value){
+            var $pin = document.getElementById('pin');
             if(this.check()){
                 pinArr.push(value);
-                console.log(pinArr);
                 for(var i = 0; i < pinArr.length; i++){
-                    document.getElementById('pin').getElementsByTagName('span')[i].setAttribute('class','on');
+                    $pin.getElementsByTagName('span')[i].setAttribute('class','on');
                 }
+                console.log(pinArr);
                 if(pinArr.length == 4){
-
-                }
+                    var fin = '';
+                    for(var k = 0 ; k < 4; k++){
+                        fin += pinArr[k];
+                    }
+                    if(fin == $data.pinword){
+                        document.getElementById('password').removeAttribute('class');
+                        document.getElementById('pinword').removeAttribute('class');
+                        pinArr.length = 0;
+                        this.init();
+                    } else {
+                        $pin.setAttribute('class','shocks');
+                        var _this = this;
+                        setTimeout(function(){
+                            pinArr.length = 0;
+                            $pin.removeAttribute('class');
+                            _this.init();
+                        },500);
+                    }
+                }else {}
             }else {
                 pinArr.length = 0;
                 this.init();
             }
         },
         'check': function(){
-            if(pinArr.length >= 4){
+            if(pinArr.length > 4){
             }else {
                 return true;
             }
@@ -81,9 +99,9 @@ console.log($td);
 
 for(var i = 0; i < $td.length; i ++){
     $td[i].onclick = function(){
-        var value = this.getAttribute('data-val');
+        var value = this.getAttribute('data-val') - 0;
         if(value >= 0){
-            pin.click(value-0);
+            pin.click(value);
         }else if (value == -1){
             pin.moveRight();
         }else {
