@@ -5,7 +5,7 @@ var autoprefixer = require('autoprefixer');
 var fs=require('fs')
 var browserSync = require('browser-sync').create();
 var reload      = browserSync.reload;
-var filter      = require('gulp-filter');
+// var filter      = require('gulp-filter');
 var sourcemaps = require('gulp-sourcemaps');
 
 
@@ -28,7 +28,7 @@ var formatDateTime = function() {
           server: "./"+now
       });
       gulp.watch("./"+now+"/src/sass/*.scss", ['scssToCss']);
-      gulp.watch("./"+now+"/src/*/*.js").on('change', reload);
+      gulp.watch("./"+now+"/src/*/*/*.js").on('change', reload);
       gulp.watch(["./"+now+"/*.html","./"+now+"/*/*.html","./"+now+"/*/*/*.html"]).on('change', reload);
   });
 
