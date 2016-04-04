@@ -1,0 +1,62 @@
+@import "./conmon";
+.inputPoint{
+  @include center;
+  // margin: 0;
+  padding: 0;
+  top: 32%;
+  li{
+    display: inline-block;
+    background: transparent;
+    height:6px;
+    width:6px;
+    border: 1px solid rgba(255,255,255,.7);
+    border-radius: 50%;
+    margin:0 3px;
+  }
+  .active{
+    background: rgba(255,255,255,.7);
+  }
+}
+.tips{
+  color:rgba(255,255,255,.6);
+  font-size:12px;
+  @include center;
+  top:40%;
+}
+#phoneInput{
+  width:180px;
+  @include center;
+  top:45%;
+  li{
+    display: inline-block;
+    width:60px;
+    height:60px;
+    // outline: 1px solid red;
+    color:$themeColor;
+    float: left;
+    font-size:24px;
+    p{
+      color:rgba(255,255,255,.8);
+      font-size:12px;
+      pointer-events: none;
+      // outline: 1px solid red;
+      transform: translateX(-6px);
+      margin: 0;
+      padding: 0;
+      // text-align: center;
+    }
+  }
+
+}
+.forget{
+  color:rgba(255,255,255,.5);
+  @include center;
+  bottom:10%;
+}
+.fanhui{
+  transform: rotateZ(180deg);
+  transform-origin: 15% 22.5%;
+}
+.right2{
+  transform:translateX(-7px);
+}
