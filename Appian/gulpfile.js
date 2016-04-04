@@ -22,12 +22,12 @@ var formatDateTime = function() {
   // 静态服务器 + 监听 scss/html 文件
   gulp.task('serve', ['scssToCss'], function() {
       browserSync.init({
-          server: "./"+now
+          server: "./"
       });
-      gulp.watch("./"+now+"/src/sass/*.scss", ['scssToCss']);
-      gulp.watch("./"+now+"/src/js/*.js").on('change', reload);
-      gulp.watch("./"+now+"/*.html").on('change', reload);
-      gulp.watch(["./"+now+"/*.html","./"+now+"/*/*.html","./"+now+"/*/*/*.html"]).on('change', reload);
+      gulp.watch("./**/src/sass/*.scss", ['scssToCss']);
+      gulp.watch("./**/src/js/*.js").on('change', reload);
+      gulp.watch("./**/*.html").on('change', reload);
+      gulp.watch(["./**/*.html","./**/*/*.html","./**/*/*/*.html"]).on('change', reload);
   });
 
   console.log(now);
@@ -52,12 +52,12 @@ var formatDateTime = function() {
   });
 
   gulp.task('scssToCss', function () {
-      return gulp.src('./'+now+'/src/sass/*.scss')
+      return gulp.src('./**/src/sass/*.scss')
           .pipe(sourcemaps.init())
           .pipe(sass().on('error', sass.logError))
           .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
           .pipe(sourcemaps.write())
-          .pipe(gulp.dest('./'+now+'/dest/css/'))
+          .pipe(gulp.dest('./**/dest/css/'))
           .pipe(browserSync.reload({stream: true}));
   });
   gulp.task('default', ['serve']); //默认任务
