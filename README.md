@@ -9,7 +9,9 @@ I need to debug myself.(⊙﹏⊙)
 
 > Debugging's actually all about finding the bug,<br/>
 > about understanding why the bug was there to begin with,<br/>
-> about knowing that its existence was no accident.<br/><br/>
+> about knowing that its existence was no accident.<br/>
+
+<br/>
 
 No one like loneliness,just dislike disappointment.<br/>
 Even thought I am used to be.(,,•́ . •̀,,)
